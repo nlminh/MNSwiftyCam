@@ -57,7 +57,8 @@ class ViewController: SwiftyCamViewController, SwiftyCamViewControllerDelegate {
     
 
 	func swiftyCam(_ swiftyCam: SwiftyCamViewController, didTake photo: UIImage) {
-		let newVC = PhotoViewController(image: photo)
+        let newVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PhotoViewController") as! PhotoViewController
+        newVC.backgroundImage = photo
 		self.present(newVC, animated: true, completion: nil)
 	}
 
