@@ -41,6 +41,9 @@ open class SwiftyCamViewController: UIViewController {
 
 	public enum VideoQuality {
 
+        /// AVCaptureSessionPresetPhoto
+        case photo
+
 		/// AVCaptureSessionPresetHigh
 		case high
 
@@ -99,7 +102,7 @@ open class SwiftyCamViewController: UIViewController {
 
 	/// Video capture quality
 
-	public var videoQuality : VideoQuality       = .high
+	public var videoQuality : VideoQuality       = .photo
 
 	/// Sets whether flash is enabled for photo and video capture
 
@@ -156,7 +159,7 @@ open class SwiftyCamViewController: UIViewController {
     public var allowAutoRotate                = false
 
     /// Specifies the [videoGravity](https://developer.apple.com/reference/avfoundation/avcapturevideopreviewlayer/1386708-videogravity) for the preview layer.
-    public var videoGravity                   : SwiftyCamVideoGravity = .resizeAspect
+    public var videoGravity                   : SwiftyCamVideoGravity = .resizeAspectFill
 
     /// Sets whether or not video recordings will record audio
     /// Setting to true will prompt user for access to microphone on View Controller launch.
@@ -862,6 +865,7 @@ open class SwiftyCamViewController: UIViewController {
 
 	fileprivate func videoInputPresetFromVideoQuality(quality: VideoQuality) -> String {
 		switch quality {
+        case .photo: return AVCaptureSession.Preset.photo.rawValue
 		case .high: return AVCaptureSession.Preset.high.rawValue
 		case .medium: return AVCaptureSession.Preset.medium.rawValue
 		case .low: return AVCaptureSession.Preset.low.rawValue
